@@ -4,6 +4,8 @@ import path from 'path';
 import session from 'express-session';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
+import multer from "multer";
+import methodOverride from 'method-override';
 
 import loggerMiddleware from './src/middlewares/logger.middleware.js';
 
@@ -12,17 +14,21 @@ import postsRouter from './src/routes/posts.routes.js';
 import commentsRouter from './src/routes/comments.routes.js';
 import likesRouter from './src/routes/likes.routes.js';
 import { ApplicationError } from './src/error-handler/applicationError.js';
+import jwtAuth from './src/middlewares/jwt.middleware.js';
+import UserController from './src/controllers/user.controller.js';
 
 
 
 const app = express();
-
+app.use(methodOverride('_method'));
 app.use(loggerMiddleware)
 //Controllers
 
+const userController = new UserController();
 //in-built middlewares
 
 app.use(express.static('public'));
+app.use(express.static('uploads'));
 app.use(cookieParser());
 app.use(
   session({
@@ -45,10 +51,11 @@ app.set(
 app.use(bodyParser.urlencoded({ extended: false }));
 
 //Routes
+app.get("/", userController.getHome);
 app.use("/api/user", userRouter);
-app.use("/api/posts", postsRouter);
-app.use("/api/comments", commentsRouter);
-app.use("/api/likes", likesRouter);
+app.use("/api/posts",jwtAuth, postsRouter);
+app.use("/api/comments",jwtAuth, commentsRouter);
+app.use("/api/likes",jwtAuth, likesRouter);
 
 // Error handler middleware
 app.use((err, req, res, next)=>{

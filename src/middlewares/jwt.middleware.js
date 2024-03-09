@@ -1,11 +1,12 @@
 import jwt from 'jsonwebtoken';
 const jwtAuth = (req, res, next)=>{
     // 1. Read the token.
-    const token = req.headers['authorization'];
+    const token = req.session.JWT_token;
 
     // 2. if no token, return the error.
     if(!token){
-        return res.status(401).send('Unauthorized');
+        return res.redirect('/');
+        //return res.status(401).send('Unauthorized');
     }
     // 3. check if token is valid.
     try{
@@ -13,12 +14,13 @@ const jwtAuth = (req, res, next)=>{
             token,
             "AIb6d35fvJM4O9pXqXQNla2jBCH9kuLz"
         );
-        req.userID = payload.userID;
+        req.body.userId = payload.userId;
         console.log(payload);
     } catch(err){
         // 4. return error.
         console.log(err);
-        return res.status(401).send('Unauthorized');
+        return res.redirect('/home');
+        //return res.status(401).send('Unauthorized');
     }
 
     // 5. call next middleware.

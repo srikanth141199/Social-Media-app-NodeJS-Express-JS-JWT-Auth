@@ -1,0 +1,10 @@
+<h1>All Posts</h1>
+<div class="posts-container">
+    <% posts.forEach(post => { %>
+        <div class="post">
+            <h3><%= post.caption %></h3>
+            <img src="<%= post.imageUrl %>" alt="Post Image">
+            <a href="<%= post.id %>">View Details</a>
+        </div>
+    <% }); %>
+</div>

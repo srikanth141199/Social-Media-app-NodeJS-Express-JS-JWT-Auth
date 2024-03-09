@@ -1,0 +1,10 @@
+<!-- postDetails.ejs -->
+<h1>Post Details</h1>
+<div>
+    <h3><%= post.caption %></h3>
+    <img src="<%= post.imageUrl %>" alt="Post Image">
+    <form action="<%= post.id %>" method="POST">
+        <input type="hidden" name="_method" value="POST">
+        <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
+</div>

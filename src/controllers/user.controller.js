@@ -1,5 +1,6 @@
 // Import the user model
 import UserModel from '../models/user.model.js';
+import jwt from "jsonwebtoken";
 
 // Controller for user-related tasks
 export default class UserController {
@@ -37,6 +38,16 @@ export default class UserController {
       return res.render('login', {
         errorMessage: 'Invalid Credentials',
       });
+    }
+    else{
+      const token = jwt.sign(
+        { userId: user.id, email: user.email },
+        "AIb6d35fvJM4O9pXqXQNla2jBCH9kuLz",
+        {
+          expiresIn: "1h",
+        }
+      );
+      req.session.JWT_token = token;
     }
     // Set the user's email in the session
     req.session.userEmail = email;
