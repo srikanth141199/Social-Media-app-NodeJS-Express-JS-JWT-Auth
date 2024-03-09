@@ -67,7 +67,7 @@ app.use((err, req, res, next)=>{
 
 // 4. Middleware to handle 404 requests.
 app.use((req, res)=>{
-  res.status(404).send("API not found. Please check our documentation for more information at localhost:3200/api-docs")
+  res.status(404).send("API not found")
 });
 
 
