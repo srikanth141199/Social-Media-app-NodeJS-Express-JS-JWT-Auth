@@ -1,0 +1,24 @@
+<!-- likes.ejs -->
+
+<style>
+    form{
+        padding: 0%;
+    }
+
+    .btn_form {
+        margin: 0 !important;
+    }
+</style>
+
+<h1>Likes for Post <%= postId %></h1>
+
+<ul>
+  <% likes.forEach(like => { %>
+    <li>User <%= like.userId %> liked this post</li>
+  <% }); %>
+</ul>
+
+<form action="/api/likes/toggle/<%= postId %>" method="POST">
+  <input type="hidden" name="userId" value="<%= userId %>">
+  <button type="submit" class="btn btn-primary btn_form">Toggle Like</button>
+</form>

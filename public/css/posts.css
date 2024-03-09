@@ -66,3 +66,12 @@ form button {
     color: blue;
     text-decoration: underline;
 }
+
+
+form{
+    padding: 0%;
+}
+
+.btn_form {
+    margin: 0 !important;
+}
