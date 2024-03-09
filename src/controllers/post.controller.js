@@ -9,7 +9,7 @@ export default class PostController{
     addPost(req, res){
         const {caption} = req.body;
         const imageUrl = 'images/' + req.file.filename;
-        const userId = req.body.userId;
+        const userId = req.session.userId;
         const posts = PostModel.add(userId, caption, imageUrl);
         res.render("posts",{posts : posts})
     }
@@ -21,7 +21,7 @@ export default class PostController{
 
     deletePost(req, res){
         const {id} = req.params;
-        const userId = req.body.userId;
+        const userId = req.session.userId;
         const result = PostModel.delete(id, userId);
         console.log(result);
         if(result != undefined){
@@ -41,7 +41,7 @@ export default class PostController{
     }
 
     getPostsByUser(req, res){
-        const userId = req.body.userId;
+        const userId = req.session.userId;
         const posts = PostModel.userPosts(userId);
         res.render("posts", {posts:posts});
     }
