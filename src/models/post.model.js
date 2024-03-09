@@ -25,7 +25,7 @@ export default class PostModel{
             return posts
         }
         else{
-            return "Only the person who posted it can delete the Post";
+            return undefined;
         }
     }
 

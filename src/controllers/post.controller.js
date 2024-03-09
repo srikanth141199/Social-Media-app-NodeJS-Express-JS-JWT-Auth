@@ -24,8 +24,14 @@ export default class PostController{
         const userId = req.body.userId;
         const result = PostModel.delete(id, userId);
         console.log(result);
-        const posts = PostModel.getAll();
-        res.render("posts",{posts : posts})
+        if(result != undefined){
+            const posts = PostModel.getAll();
+            res.render("posts",{posts : posts})
+        }
+        else{
+            res.render("404");
+        }
+        
     }
 
     getPostDetails(req, res){
