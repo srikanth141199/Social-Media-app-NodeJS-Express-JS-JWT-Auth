@@ -61,3 +61,8 @@ form button {
     text-decoration: none;
     margin-top: 10px;
 }
+
+.view-comments {
+    color: blue;
+    text-decoration: underline;
+}

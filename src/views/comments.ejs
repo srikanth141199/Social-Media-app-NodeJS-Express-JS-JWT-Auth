@@ -1,0 +1,16 @@
+<ul>
+    <% comments.forEach(comment => { %>
+    <li><%= comment.content %>
+    <!-- Delete Comment Form -->
+    <form action="/api/comments/<%= comment.id %>?_method=DELETE" method="POST">
+        <button type="submit">Delete Comment</button>
+    </form>
+
+    <!-- Update Comment Form -->
+    <form action="/api/comments/<%= comment.id %>?_method=PUT" method="POST">
+        <input type="text" name="content" value="<%= comment.content %>">
+        <button type="submit">Update Comment</button>
+    </form>
+    </li>
+    <% }); %>
+</ul>
