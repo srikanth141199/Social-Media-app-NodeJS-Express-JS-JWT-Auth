@@ -1,16 +1,46 @@
+<style>
+    .comment-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .update-form {
+        display: flex;
+        align-items: center;
+    }
+
+    .update-form input[type="text"] {
+        margin-right: 10px; /* Adjust as needed */
+        flex: 1; /* Allow the input to grow */
+    }
+    form {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-top: 5px;
+    }
+    .form_button{
+        width: 50%;
+    }
+</style>
+
 <ul>
     <% comments.forEach(comment => { %>
-    <li><%= comment.content %>
-    <!-- Delete Comment Form -->
-    <form action="/api/comments/<%= comment.id %>?_method=DELETE" method="POST">
-        <button type="submit">Delete Comment</button>
-    </form>
+    <li>
+        <div><%= comment.content %></div>
+        <!-- Delete Comment Form -->
+        <form action="/api/comments/<%= comment.id %>?_method=DELETE" method="POST">
+            <button type="submit" class="btn btn-danger ">Delete Comment</button>
+        </form>
 
-    <!-- Update Comment Form -->
-    <form action="/api/comments/<%= comment.id %>?_method=PUT" method="POST">
-        <input type="text" name="content" value="<%= comment.content %>">
-        <button type="submit">Update Comment</button>
-    </form>
+        <!-- Update Comment Form -->
+        <form action="/api/comments/<%= comment.id %>?_method=PUT" method="POST" class="update-form">
+            <input type="text" name="content" value="<%= comment.content %>">
+            <button type="submit" class="btn btn-warning form_button">Update Comment</button>
+        </form>
     </li>
     <% }); %>
 </ul>
